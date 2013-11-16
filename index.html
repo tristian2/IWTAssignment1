@@ -7,12 +7,29 @@
 
         <title>Assignment 1 - Remakes</title>
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/DOMParser.js"></script>
         <script type="text/javascript" src="js/engine.js"></script>
 	</head>
 
 	<body>
 		<h1>Remakes</h1>
-		<div>bollox</div>
 		<div id="target"></div>
+		
+		<script>
+		
+		$(document).ready(function() {
+			var xmlDoc = getXSL("xml/remakes.xsl");
+			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
+			
+			$(xmlDoc).find("xsl\\:for-each").first().attr("select","remakes/remake[ryear=1988]");
+			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
+		});
+		
+		$("#remakeQuery").val("select","remakes/remake[ryear=1988]");
+
+
+
+		</script>
+		<input id="remakeQuery" type="text"/>
 	</body>
 </html>
