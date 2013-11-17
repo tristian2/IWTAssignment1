@@ -12,11 +12,19 @@
 		        <th>Remake</th>
 		        <th>Remake Year</th>
 		      </tr>
-		      <xsl:for-each select="remakes/remake[ryear=1990]">
+		      
+		      <xsl:for-each select="remakes/remake[contains(rtitle,'noi')] | remakes/remake[ryear=1999] | remakes/remake[contains(stitle,'1999')] | remakes/remake[syear=1989] | remakes/remake[fraction=0.2]">
 		      <tr>
 		        <td><xsl:value-of select="rtitle"/></td>
 		        <td><xsl:value-of select="ryear"/></td>
-		        <td><xsl:value-of select="fraction"/></td>
+		        <td>
+		        	<xsl:value-of select="fraction"/>
+		        	<img class="ratingImg" src="css/5stars.png">  
+						<xsl:attribute name="style">
+							clip:rect(0px,<xsl:value-of select="fraction*60" />px,200px,0px);
+						</xsl:attribute>
+		        	</img>		        
+		        </td>
 		        <td><xsl:value-of select="stitle"/></td>
 		        <td><xsl:value-of select="syear"/></td>
 		      </tr>

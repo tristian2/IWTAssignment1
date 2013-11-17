@@ -9,13 +9,37 @@
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js/DOMParser.js"></script>
         <script type="text/javascript" src="js/engine.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 	</head>
 
 	<body>
 		<h1>Remakes</h1>
+		<div id="queryForm">
+			<div>
+				<span class="formHeading">Remake title:</span>
+				<input id="remakeTitle" type="text"/>
+			</div>
+			<div>
+				<span class="formHeading">Remake year:</span>
+				<input id="remakeYear" type="text"/>
+			</div>
+			<div>
+				<span class="formHeading">Original title:</span>
+				<input id="originalTitle" type="text"/>
+			</div>
+			<div>
+				<span class="formHeading">Original year:</span>
+				<input id="originalYear" type="text"/>
+			</div>
+			<div>
+				<span class="formHeading">Remake fraction:</span>
+				<input id="remakeFraction" type="text"/>
+			</div>
+		
+		</div>
 		<div id="target"></div>
 		
-		<script>
+		<script type="text/javascript">
 		
 		$(document).ready(function() {
 			var xmlDoc = getXSL("xml/remakes.xsl");
@@ -23,13 +47,14 @@
 			
 			$(xmlDoc).find("xsl\\:for-each").first().attr("select","remakes/remake[ryear=1988]");
 			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
+			$("#remakeQuery").val("remakes/remake[ryear=1988]");
 		});
 		
-		$("#remakeQuery").val("select","remakes/remake[ryear=1988]");
+		
 
 
 
 		</script>
-		<input id="remakeQuery" type="text"/>
+		
 	</body>
 </html>
