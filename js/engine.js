@@ -69,7 +69,7 @@ function parseQuery() {
 	 * fraction, range
 	 * 
 	 */			
-	 debugger;	
+	 //debugger;	
 	 query=query+"remakes/remake[contains(rtitle,\'"+$("#remakeTitle").val()+"\')] | ";
 	 query=query+"remakes/remake[ryear="+$("#remakeYear").val().toString()+"] | ";
 	 query=query+"remakes/remake[contains(stitle,\'"+$("#originalTitle").val()+"\')] | "; 
@@ -82,6 +82,15 @@ function parseQuery() {
 
 
 }
+
+function sort(column) {
+
+	console.log("gonna sort by:"+column);
+
+
+}
+
+
 
 
 $(document).ready(function() {
@@ -117,6 +126,30 @@ $(document).ready(function() {
 	 	parseQuery();
 	 	beginProcessing();
 	});
+	
+	
+	
+	$("#rtitle").click(function () { 
+	  console.log("sort by:"+$(this));
+	  sort(this.id);
+	});
+    $("#ryear").click(function () { 
+	  console.log("sort by:"+$(this));
+	  sort(this.id);
+	});
+    $("#fraction").click(function () { 
+	  console.log("sort by:"+$(this));
+	  sort(this.id);
+	});
+	$("#stitle").click(function () { 
+	  console.log("sort by:"+$(this)); 
+	  sort(this.id);
+	});
+    $("#syear").click(function () { 
+	  console.log("sort by:"+$(this));
+	  sort(this.id);
+	});
+		        
 	
 });
 			

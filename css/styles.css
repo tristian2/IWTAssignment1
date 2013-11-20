@@ -12,3 +12,8 @@ body {
 	position:absolute;
 	
 }
+.ratingCell {
+	width:110px;
+	padding-left:5px;
+	position:absolute;
+}
