@@ -1,7 +1,3 @@
-var globalQuery="";
-
-
-
 function getXML(xmlUrl) {
 	var xhr = $.ajax({
 		url: xmlUrl,
@@ -12,7 +8,7 @@ function getXML(xmlUrl) {
         	//console.log("success"+response);
         }
 	});
-	//////debugger;
+	//debugger;
 	return xhr.responseXML;
 }
 
@@ -26,25 +22,24 @@ function getXSL(xmlUrl) {
         	//console.log("success"+response);
         }
 	});
-	//////debugger;
+	//debugger;
 	var parser = new DOMParser();
 	var doc = parser.parseFromString(xhr.responseText, "application/xml");
 	return doc;
 }
 
-function beginProcessing(load) {
+function beginProcessing() {
 	var xmlDoc= getXML("xml/remakes.xml");
 	//console.log("the xml file:"+xmlDoc);
 	
 	var stylesheet = getXSL("xml/remakes.xsl");
 	//$("#remakeQuery").val("remakes/remake[ryear=1988]");
 	//var remakeQuery = $("#remakeQuery").val();
-	if(load)
-		$(stylesheet).find("xsl\\:for-each").first().attr("select",parseQuery());
+	//$(stylesheet).find("xsl\\:for-each").first().attr("select",parseQuery());
 	//$(stylesheet).find("xsl\\:sort").first().attr("select",parseQuery());
 	
 	//console.log("the stylesheet file:"+stylesheet);
-	//////debugger;
+	//debugger;
 	if(typeof(XSLTProcessor)!="undefined") {
 		var processor = new XSLTProcessor();
 		processor.importStylesheet(stylesheet);
@@ -61,11 +56,11 @@ function beginProcessing(load) {
 		console.log("unsupported browser");
 	}
 	
-	//console.log("loaded");
+	console.log("loaded");
 }
 
 function parseQuery() {
-	var tempquery="";
+	var query="";
 	/*
 	 * remakes/remake[ryear=1990]
 	 * title wildcard
@@ -74,7 +69,7 @@ function parseQuery() {
 	 * fraction, range
 	 * 
 	 */			
-	 //////debugger;	
+	 //debugger;	
 	 /*
 	 query=query+"remakes/remake[contains(rtitle,\'"+$("#remakeTitle").val()+"\')] | ";
 	 query=query+"remakes/remake[ryear="+$("#remakeYear").val().toString()+"] | ";
@@ -82,10 +77,10 @@ function parseQuery() {
 	 query=query+"remakes/remake[syear="+$("#originalYear").val().toString()+"] | ";  
 	 query=query+"remakes/remake[fraction="+$("#remakeFraction").val().toString() +"]";   
 	*/
- 	tempquery=tempquery+"remakes/remake[ryear="+$("#remakeYear").val().toString()+"] ";
-    //console.log("parseQuery:"+tempquery);
+ 	query=query+"remakes/remake[ryear="+$("#remakeYear").val().toString()+"] ";
+    console.log("parseQuery:"+query);
 
-	return globalQuery;
+	return query;
 
 
 }
@@ -96,121 +91,16 @@ function sort(column) {
 
 
 }
-//var query = "";
 
-function buildQuery() {
-	
-	var tempQuery = "";
-	$.each( $(".formElement"), function(key,value) {
-		//console.log("key:"+key+" value:"+value);
-		//////debugger;
-		switch(value.id) {
-			
-			case "remakeTitle":
-				console.log("remakeTitle");
-				if( value.value!="")	
-					tempQuery = parseTitle(value.value, "remake title","remakeTitle","rtitle");				
-				break;
-			case "remakeFraction":
-				console.log("remakeFraction");
-				break;
-			case "originalYear":
-				console.log("originalYear", "original year");
-				if( value.value!="")	
-					tempQuery = parseYear(value.value, "original year","originalYear","syear");				
-				break;
-			case "remakeYear":
-				console.log("remakeYear");
-				if( value.value!="")	
-					tempQuery = parseYear(value.value, "remake year","remakeYear","ryear");
-				break;
-			case "originalTitle":
-				console.log("originalTitle");
-				if( value.value!="")	
-					tempQuery = parseTitle(value.value, "original title","originalTitle","stitle");				
-				break;
-		}
-		//console.log("query:"+tempQuery);
-		
-		//Object[ property value = "" attribute value = "null", input#remakeYear.formElement property value = "1931" attribute value = "null", input#originalTitle.formElement property value = "" attribute value = "null", input#originalYear.formElement property value = "" attribute value = "null", input#remakeFraction.formElement property value = "0.8" attribute value = "null"]
-	});
-}
-
-function parseTitle(term, origin, control,node) {
-	var titleQuery = "";
-	var valid = false;
-//debugger;
-	if( term!=""){
- 		valid=true; 
-
-		//xslt is case sensitive, users are not!
-		 titleQuery=titleQuery+"remakes/remake[contains(translate("+node+",$smallcase,$uppercase), translate(\'"+term+"\',$smallcase,$uppercase))] "+ $('input[name=refine]:radio:checked')[0].value + " "; 
-
-		//for now
-		globalQuery = titleQuery.substr(0,titleQuery.length-2);
-		//console.log("globalQuery:"+globalQuery);
-	} 
-						  
-	return titleQuery; 
-}
-function parseYear(term, origin, control,node) {
-	var yearQuery = "";
-	var valid = false;
-	var operator = "=";
-	//debugger;
-	//four consitions, <,>,=,yyyy maybe more later
-	if( term.indexOf("<")>-1){
-		term=term.substr(1,term.length);
-		operator="<";
-	}
-		//add part to year query 
-	if( term.indexOf("=")>-1){
-		term=term.substr(1,term.length);
-		operator="=";
-	}
-		//add part to year query 
-	if( term.indexOf(">")>-1){
-		term=term.substr(1,term.length);
-		operator=">";
-	}
-		//add part to year query 
-		
-	//pattern to validate year /\d{4}/
-	var url = /\d{4}/;
-
-	if( term.match(url)!=null){
- 		valid=true; 
-		//query=query+"remakes/remake["+node+"="+$("#originalYear").val().toString()+"] | ";  
-		yearQuery=yearQuery+"remakes/remake["+node+operator+term+"] " + $('input[name=refine]:radio:checked')[0].value +" ";  
-		
-		//for now
-		globalQuery = yearQuery.substr(0,yearQuery.length-2);
-		//console.log("globalQuery:"+globalQuery);
-	} 
-						  
-	return yearQuery; 
-}
-
-var error="";
 $(document).ready(function() {
-	console.clear();
-	beginProcessing(false);
-	
-	$("#run").click(function () { 
-	  //debugger;
-	  console.log("run pressed");
-	  globalQuery="";
-	  buildQuery();
-	  console.log("GLOBALQUERY:"+globalQuery);
-	  beginProcessing(true);
-	});
+	beginProcessing();
 });
 
 			
 
 /*
 $(document).ready(function() {
-	////////debugger;
+	debugger;
 	// Handler for .ready() called.
 	var xmlDoc = getXSL("xml/remakes.xsl");
 	//$(xmlDoc).find("xsl\\:for-each").first().attr("select");

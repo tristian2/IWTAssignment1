@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msws="http://tempuri.org/">
 <xsl:output method="html" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" indent="yes"/>
-    <xsl:template match="/">
+   
+   
+   		      <xsl:variable name="smallcase" select="'abcdefghijklmnopqrstuvwxyz'" />
+			<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+
+
+ <xsl:template match="/">
 	 <html xmlns="http://www.w3.org/1999/xhtml">
 		  <body>
 		    <table border="1">
@@ -12,8 +18,12 @@
 		        <th><span id="stitle">Title</span></th>
 		        <th><span id="syear">Year</span></th>
 		      </tr>
+
+			
+		      <!--<xsl:for-each select="remakes/remake[contains(translate(stitle,$smallcase,$uppercase), translate('kiss',$smallcase,$uppercase))]">-->
+		      <!--titleQuery=titleQuery+"remakes/remake[contains("+node+",\'"+term+"\')] | "; -->
 		      
-		      <xsl:for-each select="remakes/remake[contains(rtitle,'noi')] | remakes/remake[ryear=1999] | remakes/remake[contains(stitle,'1999')] | remakes/remake[syear=1989] | remakes/remake[fraction=0.2]">
+		      <xsl:for-each select="remakes/remake">
 		      <xsl:sort select="rtitle"/>
 		      <tr>
 		        <td><xsl:value-of select="rtitle"/></td>

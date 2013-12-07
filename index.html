@@ -15,27 +15,33 @@
 	<body>
 		<h1>Remakes</h1>
 		<div id="queryForm">
-			<div>
-				<span class="formHeading">Remake title:</span>
-				<input id="remakeTitle" type="text"/>
+			<div class="formRow">
+				<div class="formHeading">Remake title:</div>
+				<input class="formElement" id="remakeTitle" type="text"/>
+				<input type="radio" name="refine"  value="|">or
+				<input type="radio" name="refine"  value="&">and
+				<span>N.B. the "and" operator will combine the input to return result that fullfil all the crtireia, the "or" operator will retunr any movie that fulfils the criteria</span>
 			</div>
-			<div>
-				<span class="formHeading">Remake year:</span>
-				<input id="remakeYear" type="text"/>
+			<div class="formRow">
+				<div class="formHeading">Remake year:</div>
+				<input class="formElement" id="remakeYear" type="text"/>
 			</div>
-			<div>
-				<span class="formHeading">Original title:</span>
-				<input id="originalTitle" type="text"/>
+			<div class="formRow">
+				<div class="formHeading">Original title:</div>
+				<input class="formElement" id="originalTitle" type="text"/>
 			</div>
-			<div>
-				<span class="formHeading">Original year:</span>
-				<input id="originalYear" type="text"/>
+			<div class="formRow">
+				<div class="formHeading">Original year:</div>
+				<input class="formElement" id="originalYear" type="text"/>
 			</div>
-			<div>
-				<span class="formHeading">Remake fraction:</span>
-				<input id="remakeFraction" type="text"/>
+			<div class="formRow">
+				<div class="formHeading">Remake fraction:</div>
+				<input class="formElement" id="remakeFraction" type="text" />
 			</div>
-		
+			<div class="formRow">
+				<div class="formHeading">&nbsp;</div>
+				<input class="formButton" id="run" type="button" value="run"/>
+			</div>
 		</div>
 		<div id="target"></div>
 		
