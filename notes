@@ -1,0 +1,18 @@
+
+		      <!--<xsl:for-each select="remakes/remake[contains(translate(stitle,$smallcase,$uppercase), translate('kiss',$smallcase,$uppercase))]">-->
+		      <!--titleQuery=titleQuery+"remakes/remake[contains(rtitle, 'Bask')] | remakes/remake[contains(year, '2000')]-->
+		      
+		      <!--<xsl:for-each select="remakes/remake[contains(translate(rtitle,$smallcase,$uppercase), translate('bask',$smallcase,$uppercase))]">-->
+		      
+		      
+		      		/*
+		$(document).ready(function() {
+			var xmlDoc = getXSL("xml/remakes.xsl");
+			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
+			
+			$(xmlDoc).find("xsl\\:for-each").first().attr("select","remakes/remake[ryear=1988]");
+			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
+			$("#remakeQuery").val("remakes/remake[ryear=1988]");
+		});
+		*/
+		

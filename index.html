@@ -8,6 +8,7 @@
         <title>Assignment 1 - Remakes</title>
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js/DOMParser.js"></script>
+        <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="js/engine.js"></script>
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 	</head>
@@ -18,7 +19,7 @@
 			<div class="formRow">
 				<div class="formHeading">Remake title:</div>
 				<input class="formElement" id="remakeTitle" type="text"/>
-				<input type="radio" name="refine"  value="|">or
+				<input type="radio" name="refine"  value="|" checked="checked">or
 				<input type="radio" name="refine"  value="&">and
 				<span>N.B. the "and" operator will combine the input to return result that fullfil all the crtireia, the "or" operator will retunr any movie that fulfils the criteria</span>
 			</div>
@@ -43,24 +44,6 @@
 				<input class="formButton" id="run" type="button" value="run"/>
 			</div>
 		</div>
-		<div id="target"></div>
-		
-		<script type="text/javascript">
-		
-		$(document).ready(function() {
-			var xmlDoc = getXSL("xml/remakes.xsl");
-			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
-			
-			$(xmlDoc).find("xsl\\:for-each").first().attr("select","remakes/remake[ryear=1988]");
-			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
-			$("#remakeQuery").val("remakes/remake[ryear=1988]");
-		});
-		
-		
-
-
-
-		</script>
-		
+		<div id="target"></div>	
 	</body>
 </html>
