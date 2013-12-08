@@ -3,10 +3,15 @@
 <xsl:output method="html" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" indent="yes"/>
 <xsl:variable name="smallcase" select="'abcdefghijklmnopqrstuvwxyz'" />
 <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
- <xsl:template match="/">
+ <xsl:template match="/" name="fred">
 	 <html xmlns="http://www.w3.org/1999/xhtml">
 		  <body>
-		    <table border="1" id="movieTable">
+		  	
+		  	
+
+              
+              
+		    <table id="movieTable">
 		      <thead> 
 			      <tr>	
 					<th><span id="rtitle" class="filmheading">Remake</span></th>
@@ -18,23 +23,70 @@
 		      </thead> 
 		      <xsl:for-each select="remakes/remake">
 		      <xsl:sort select="rtitle"/>
+
 		      <tr>
-		        <td><xsl:value-of select="rtitle"/></td>
-		        <td><xsl:value-of select="ryear"/></td>
+		        <td>
+					<xsl:element name="a">
+					    <xsl:attribute name="href">
+					        http://www.imdb.com/find?q=<xsl:value-of select="rtitle"/>&amp;s=all
+					    </xsl:attribute>
+					    <xsl:attribute name="target">
+					    	_blank
+					    </xsl:attribute>						    
+					    <xsl:value-of select="rtitle"/>
+					</xsl:element>
+		        </td>
+		        <td>
+		        	<xsl:element name="a">
+					    <xsl:attribute name="href">
+					        http://en.wikipedia.org/wiki/Category:<xsl:value-of select="ryear"/>_films
+					    </xsl:attribute>
+					    <xsl:attribute name="target">
+					    	_blank
+					    </xsl:attribute>					    
+					    <xsl:value-of select="ryear"/>
+					</xsl:element>	        
+		        </td>
 		        <td class="ratingCell">
 		        	<div class="fractionvalue"><xsl:value-of select="fraction"/></div>
-		        	<div><img class="ratingImg" src="css/5stars.png">  
+		        	<div>
+		        		<img class="ratingImg" src="css/5stars.png">  
 						<xsl:attribute name="style">
 							clip:rect(0px,<xsl:value-of select="fraction*100" />px,100px,0px);
 						</xsl:attribute>
-		        	</img>	</div>	        
+		        		</img>	
+		        	</div>	        
 		        </td>
-		        <td><xsl:value-of select="stitle"/></td>
-		        <td><xsl:value-of select="syear"/></td>
+		        <td>
+					<xsl:element name="a">
+					    <xsl:attribute name="href">
+					        http://www.imdb.com/find?q=<xsl:value-of select="stitle"/>&amp;s=all
+					    </xsl:attribute>
+					    <xsl:attribute name="target">
+					    	_blank
+					    </xsl:attribute>					    
+					    <xsl:value-of select="stitle"/>
+					</xsl:element>
+		        </td>
+		        <td>	
+		        	<xsl:element name="a">
+					    <xsl:attribute name="href">
+					        http://en.wikipedia.org/wiki/Category:<xsl:value-of select="syear"/>_films
+					    </xsl:attribute>
+					    <xsl:attribute name="target">
+					    	_blank
+					    </xsl:attribute>					    
+					    <xsl:value-of select="syear"/>
+					</xsl:element>
+		        </td>
 		      </tr>
 		      </xsl:for-each>
 		    </table>
 		  </body>
 	  </html>
+    </xsl:template>
+    
+     <xsl:template name="NoMovies">
+        <tr><td>no</td></tr>
     </xsl:template>
 </xsl:stylesheet>

@@ -40,3 +40,7 @@ body {
 #movietable {
 	  width: 1065px;
 }
+
+.filter {
+	display:none;
+}

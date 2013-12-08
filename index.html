@@ -7,6 +7,7 @@
 
         <title>Assignment 1 - Remakes</title>
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript" src="js/DOMParser.js"></script>
         <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="js/engine.js"></script>
@@ -19,9 +20,9 @@
 			<div class="formRow">
 				<div class="formHeading">Remake title:</div>
 				<input class="formElement" id="remakeTitle" type="text"/>
-				<input type="radio" name="refine"  value="|" checked="checked">or
-				<input type="radio" name="refine"  value="&">and
-				<span>N.B. the "and" operator will combine the input to return result that fullfil all the crtireia, the "or" operator will retunr any movie that fulfils the criteria</span>
+				<input class="filter" type="radio" name="refine"  value="|" checked="checked"><span class="filter">or</span>
+				<input class="filter" type="radio" name="refine"  value="&"><span class="filter">and</span>
+				<span class="filter" >N.B. the "and" operator will combine the input to return result that fullfil all the crtireia, the "or" operator will retunr any movie that fulfils the criteria</span>
 			</div>
 			<div class="formRow">
 				<div class="formHeading">Remake year:</div>
@@ -35,13 +36,15 @@
 				<div class="formHeading">Original year:</div>
 				<input class="formElement" id="originalYear" type="text"/>
 			</div>
+			<!--
 			<div class="formRow">
 				<div class="formHeading">Remake fraction:</div>
 				<input class="formElement" id="remakeFraction" type="text" />
-			</div>
+			</div>-->
 			<div class="formRow">
 				<div class="formHeading">&nbsp;</div>
 				<input class="formButton" id="run" type="button" value="run"/>
+				<input class="formButton" id="reset" type="button" value="reset"/>
 			</div>
 		</div>
 		<div id="target"></div>	
