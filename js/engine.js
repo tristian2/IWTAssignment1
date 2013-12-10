@@ -107,6 +107,8 @@ function buildQuery() {
 					tempQuery = parseTitle(value.value, "remake title","remakeTitle","rtitle");				
 				break;
 			case "remakeFraction":
+				if( value.value!="")	
+					tempQuery = parseFraction(value.value, "remake fraction","remakeFraction","fraction");				
 				break;
 			case "originalYear":
 				if( value.value!="")	
@@ -139,6 +141,7 @@ function parseTitle(term, origin, control,node) {
 						  
 	return titleQuery; 
 }
+
 function parseYear(term, origin, control,node) {
 	var yearQuery = "";
 	var valid = false;
@@ -168,6 +171,38 @@ function parseYear(term, origin, control,node) {
 						  
 	return yearQuery; 
 }
+
+function parseFraction(term, origin, control,node) {
+	var fractionQuery = "";
+	var valid = false;
+	var operator = "=";
+	var url = /\d+\.?\d*/;
+
+	if( term.indexOf("<")>-1){
+		term=term.substr(1,term.length);
+		operator="<";
+	}
+	if( term.indexOf("=")>-1){
+		term=term.substr(1,term.length);
+		operator="=";
+	}
+	if( term.indexOf(">")>-1){
+		term=term.substr(1,term.length);
+		operator=">";
+	}
+
+	if( term.match(url)!=null){
+ 		valid=true; 
+		fractionQuery=fractionQuery+"remakes/remake["+node+operator+term+"] " + $('input[name=refine]:radio:checked')[0].value +" ";  
+		
+		//for now
+		globalQuery = globalQuery + fractionQuery;
+	} 
+						  
+	return fractionQuery; 
+}
+
+
 
 var error="";
 $(document).ready(function() {
