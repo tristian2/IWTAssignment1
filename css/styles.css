@@ -1,3 +1,9 @@
+/*
+ * 
+ * basic css including the moviestars to support ratings
+ * 
+ */
+
 body {
 
 }
@@ -43,4 +49,7 @@ body {
 
 .filter {
 	display:none;
+}
+#instruction {
+	font-style:italic;
 }

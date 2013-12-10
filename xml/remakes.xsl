@@ -6,11 +6,6 @@
  <xsl:template match="/" name="fred">
 	 <html xmlns="http://www.w3.org/1999/xhtml">
 		  <body>
-		  	
-		  	
-
-              
-              
 		    <table id="movieTable">
 		      <thead> 
 			      <tr>	
@@ -21,9 +16,10 @@
 			        <th><span id="syear" class="filmheading">Year</span></th>
 			      </tr>
 		      </thead> 
+		      <!-- the loop for the movies in the xml-->
 		      <xsl:for-each select="remakes/remake">
+		      <!-- the default sort, actually tablesort jquery plugin is used in the interface-->
 		      <xsl:sort select="rtitle"/>
-
 		      <tr>
 		        <td>
 					<xsl:element name="a">
@@ -85,7 +81,7 @@
 		  </body>
 	  </html>
     </xsl:template>
-    
+    <!-- not used for now as JQuery handles no movies better in the developers view -->
      <xsl:template name="NoMovies">
         <tr><td>no</td></tr>
     </xsl:template>

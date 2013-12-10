@@ -1,7 +1,13 @@
-var globalQuery="";
+/* tristian obrien dec 2013 IWT coursework 1
+ * main javascript for the movies solution
+ */
+
+/*global variables*/
+var globalQuery="";  //the query that is built from the various controls available to all methods, not the best but it works
+//var error=""; perhaps use later for say logging
 
 
-
+//get xml method
 function getXML(xmlUrl) {
 	var xhr = $.ajax({
 		url: xmlUrl,
@@ -14,6 +20,8 @@ function getXML(xmlUrl) {
 	return xhr.responseXML;
 }
 
+//get xsl sublty different from the getxsl method for chrome compatability
+//relies on the DOMParser github project by other developers
 function getXSL(xmlUrl) {
 	var xhr = $.ajax({
 		url: xmlUrl,
@@ -29,6 +37,7 @@ function getXSL(xmlUrl) {
 	return doc;
 }
 
+//handles loading the xml ans xml, transforming, applying the XSL operator to the for-each and foothold for sort
 function beginProcessing(load,sort) {
 	var xmlDoc= getXML("xml/remakes.xml");
 	var stylesheet = getXSL("xml/remakes.xsl");
@@ -64,13 +73,15 @@ function beginProcessing(load,sort) {
 			}
 			catch(err)
 			{
+				//we can assume this is due to no movies for the terms by the user, neat way to provide a sensible message to the user
 				console.log("Error description: " + err.message);
 				$( "#target" ).text("sorry, no movies!");
 			}		
 		}
 		catch(err) {
-				console.log("Error description: " + err.message);
-				$( "#target" ).text("sorry, no movies, have you checked the terms you have entered, maybe your year isnt valid?");
+			//we can assume this is due to wrong terms by the user, neat way to provide a sensible message to the user
+			console.log("Error description: " + err.message);
+			$( "#target" ).text("sorry, no movies, have you checked the terms you have entered, maybe your year isnt valid?");
 		}
 	}
 	else {
@@ -80,21 +91,20 @@ function beginProcessing(load,sort) {
 
 }
 
+//returns the global query when asked for it, todo, remove the global variable perhaps
 function parseQuery() {
 	var tempquery="";
 
 	globalQuery = globalQuery.substr(0,globalQuery.length-2);
 	return globalQuery;
-
 }
 
 function sort(column) {
-
 	console.log("gonna sort by:"+column);
-
-
 }
 
+//depending on the form elements, whether they have a vlaue or not, a xsl query is built 
+//all text treated as contains, will support <>= and number operators
 function buildQuery() {
 	
 	var tempQuery = "";
@@ -126,6 +136,7 @@ function buildQuery() {
 	});
 }
 
+//parses any title - enables user not to worry about case sensitivity
 function parseTitle(term, origin, control,node) {
 	var titleQuery = "";
 	var valid = false;
@@ -142,10 +153,12 @@ function parseTitle(term, origin, control,node) {
 	return titleQuery; 
 }
 
+//parses any year value, supports no, =, < or > operators
 function parseYear(term, origin, control,node) {
 	var yearQuery = "";
 	var valid = false;
 	var operator = "=";
+	//regex for year, four digits
 	var url = /\d{4}/;
 
 	if( term.indexOf("<")>-1){
@@ -172,6 +185,7 @@ function parseYear(term, origin, control,node) {
 	return yearQuery; 
 }
 
+//parses fraction, supports decimal and <,>,+ operators
 function parseFraction(term, origin, control,node) {
 	var fractionQuery = "";
 	var valid = false;
@@ -203,24 +217,30 @@ function parseFraction(term, origin, control,node) {
 }
 
 
-
-var error="";
+//acitavte the jquery when the page is ready, begin processing to load all the movies
 $(document).ready(function() {
 	console.clear();
-	
-	
+		
 	beginProcessing(false,false);
 	
+	//listen to the run button and tell the beginprocessing funtion its not a first load of the page and to expect criteria
 	$("#run").click(function () { 
-	  globalQuery="";
-	  buildQuery();
-	  beginProcessing(true,false);
+		globalQuery="";
+		buildQuery();
+		beginProcessing(true,false);
+		//enables the tablesorter
+		$("#movieTable").tablesorter(); 
 	});
 	
+	//reset the form
 	$("#reset").click(function () { 
 		location.reload(true);
+		//enables the tablesorter
+		$("#movieTable").tablesorter(); 
 	});
-	
+
+	//enables the tablesorter
 	$("#movieTable").tablesorter(); 
+
 });
 

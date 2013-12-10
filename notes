@@ -1,18 +1,17 @@
+readme:
 
-		      <!--<xsl:for-each select="remakes/remake[contains(translate(stitle,$smallcase,$uppercase), translate('kiss',$smallcase,$uppercase))]">-->
-		      <!--titleQuery=titleQuery+"remakes/remake[contains(rtitle, 'Bask')] | remakes/remake[contains(year, '2000')]-->
-		      
-		      <!--<xsl:for-each select="remakes/remake[contains(translate(rtitle,$smallcase,$uppercase), translate('bask',$smallcase,$uppercase))]">-->
-		      
-		      
-		      		/*
-		$(document).ready(function() {
-			var xmlDoc = getXSL("xml/remakes.xsl");
-			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
-			
-			$(xmlDoc).find("xsl\\:for-each").first().attr("select","remakes/remake[ryear=1988]");
-			$(xmlDoc).find("xsl\\:for-each").first().attr("select");
-			$("#remakeQuery").val("remakes/remake[ryear=1988]");
-		});
-		*/
-		
+* xml xslt used to transform the xml
+* jquery used to modify the for-each operator dynamically supplying a xsl string (a query)
+* table sorter used to support jquery based DOM sorting of the results
+* domparser used to enable neater support of loading xsl supporting a wider range of browsers
+* jquery migrate used so that the way the nodes can be counted can support chrome and firefox
+
+
+main techniques
+* evaluate the fraction in from the xsl for each movie, modify the css clip property
+* when ready the jquery will start the code to load the xml, xsl and transform
+* if the run control is pressed, a xsl query string will be created, load the xml, load the xsl - look for the for-each attribute and pass the xsl query
+* of the reset is pressed act out similar when the page is first loaded
+* tested in chrome on a mac and fireforx on a mac
+* devleloped using eclispse keplar
+* version maintained on github of tristian2@hotmail.com
